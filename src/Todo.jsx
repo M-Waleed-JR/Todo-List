@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
+import Box from "@mui/material/Box";
 import { useContext } from "react";
 import TodosContext from "./TodosContext/context";
 import { showEditTask, showDeleteConfirm } from "./Alerts";
@@ -36,9 +37,10 @@ export default function Todo({ todo }) {
           className={` ${todo.isCompleted ? "line-through" : ""}`}
           sx={{
             marginBottom: "10px",
-            fontSize: "25px",
+            fontSize: { xs: "18px", sm: "22px", md: "25px" },
             fontFamily: "'Playwrite GB J', cursive",
             fontWeight: "bold",
+            wordBreak: "break-word",
           }}
         >
           {todo.title}
@@ -48,15 +50,23 @@ export default function Todo({ todo }) {
           className={` ${todo.isCompleted ? "line-through" : ""}`}
           sx={{
             marginBottom: "10px",
-            fontSize: "25px",
+            fontSize: { xs: "16px", sm: "20px", md: "25px" },
             fontFamily: "'Playwrite GB J', cursive",
-            fontWeight: "bold",
+            fontWeight: "normal",
+            wordBreak: "break-word",
           }}
         >
           {todo.details}
         </Typography>
       </CardContent>
-      <CardActions sx={{ display: "flex", justifyContent: "right" }}>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "space-between", sm: "flex-end" },
+          gap: { xs: 1, sm: 1.5 },
+          px: 1,
+        }}
+      >
         <Button
           onClick={handelCompleteClick}
           sx={{
@@ -64,15 +74,18 @@ export default function Todo({ todo }) {
             color: "#4f46e5",
             borderRadius: "50px",
             fontWeight: "bold",
-            padding: "6px 16px",
+            minWidth: { xs: "40px", sm: "auto" },
+            padding: { xs: "8px", sm: "6px 16px" },
             "&:hover": {
               backgroundColor: "#94f70a7d",
             },
             transition: "all 0.3s ease",
           }}
         >
-          <CheckIcon sx={{ mr: 0.5 }} />
-          Complete
+          <CheckIcon sx={{ mr: { xs: 0, sm: 0.5 } }} />
+          <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+            Complete
+          </Box>
         </Button>
         <Button
           onClick={handleDeleteClick}
@@ -81,13 +94,16 @@ export default function Todo({ todo }) {
             color: "#e11d48",
             borderRadius: "50px",
             fontWeight: "bold",
-            padding: "6px 16px",
+            minWidth: { xs: "40px", sm: "auto" },
+            padding: { xs: "8px", sm: "6px 16px" },
             ":hover": { backgroundColor: "#ffe4e6" },
             transition: "all 0.3s ease",
           }}
         >
-          <DeleteIcon sx={{ mr: 0.5 }} />
-          Delete
+          <DeleteIcon sx={{ mr: { xs: 0, sm: 0.5 } }} />
+          <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+            Delete
+          </Box>
         </Button>
         <Button
           onClick={() => {
@@ -104,13 +120,16 @@ export default function Todo({ todo }) {
             color: "#4f46e5",
             borderRadius: "50px",
             fontWeight: "bold",
-            padding: "6px 16px",
+            minWidth: { xs: "40px", sm: "auto" },
+            padding: { xs: "8px", sm: "6px 16px" },
             ":hover": { backgroundColor: "#e0e7ff" },
             transition: "all 0.3s ease",
           }}
         >
-          <EditIcon sx={{ mr: 0.5 }} />
-          Edit
+          <EditIcon sx={{ mr: { xs: 0, sm: 0.5 } }} />
+          <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+            Edit
+          </Box>
         </Button>
       </CardActions>
     </div>

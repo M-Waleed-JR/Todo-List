@@ -3,7 +3,16 @@ import Stack from "@mui/material/Stack";
 
 export default function Filter({ currentFilter, onFilterChange }) {
   return (
-    <Stack direction="row" spacing={2} sx={{ mx: "auto", mb: 5, mt: 6 }}>
+    <Stack
+      direction="row"
+      spacing={{ xs: 1, sm: 2 }}
+      sx={{
+        mx: "auto",
+        my: { xs: 2, sm: 4 },
+        width: "100%",
+        justifyContent: "center",
+      }}
+    >
       <Button
         onClick={() => onFilterChange("completed")}
         variant="contained"
@@ -15,6 +24,10 @@ export default function Filter({ currentFilter, onFilterChange }) {
           color: "white",
           fontWeight: "bold",
           height: "36px",
+          flex: { xs: 1, sm: "initial" },
+          fontSize: { xs: "11px", sm: "14px" },
+          px: { xs: 1, sm: 3 },
+          whiteSpace: "nowrap",
           transition: "background-color 0.8s ease",
         }}
       >
@@ -31,6 +44,10 @@ export default function Filter({ currentFilter, onFilterChange }) {
           color: "white",
           fontWeight: "bold",
           height: "36px",
+          flex: { xs: 1, sm: "initial" },
+          fontSize: { xs: "11px", sm: "14px" },
+          px: { xs: 1, sm: 3 },
+          whiteSpace: "nowrap",
           transition: "background-color 0.8s ease",
         }}
       >
@@ -47,6 +64,10 @@ export default function Filter({ currentFilter, onFilterChange }) {
           color: "white",
           fontWeight: "bold",
           height: "36px",
+          flex: { xs: 1, sm: "initial" },
+          fontSize: { xs: "11px", sm: "14px" },
+          px: { xs: 1, sm: 3 },
+          whiteSpace: "nowrap",
           transition: "background-color 0.8s ease",
         }}
       >

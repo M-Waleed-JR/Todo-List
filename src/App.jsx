@@ -28,8 +28,8 @@ function AppContent() {
   });
 
   return (
-    <div className="mx-auto max-w-150 max-h-[87vh] h-fit mt-16 bg-white p-8 rounded-2xl shadow-xl shadow-slate-300 border border-slate-100 flex flex-col gap-6">
-      <h1 className="text-6xl font-extrabold text-center text-indigo-500 font-[Alexandria]">
+    <div className="mx-auto w-[calc(100%-2rem)] max-w-2xl max-h-[92vh] sm:max-h-[87vh] h-fit my-4 sm:my-8 md:my-16 bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl shadow-slate-300 border border-slate-100 flex flex-col gap-6">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center text-indigo-500 font-[Alexandria]">
         مهامي
       </h1>
 
@@ -38,9 +38,9 @@ function AppContent() {
         onFilterChange={(newFilter) => setCurrentFilter(newFilter)}
       />
 
-      <div className="flex gap-3 w-full items-center">
-        <div className="relative flex-1">
-          <Box sx={{ width: 430, maxWidth: "100%" }}>
+      <div className="flex flex-col sm:flex-row gap-3 w-full sm:items-center">
+        <div className="relative flex-1 w-full">
+          <Box sx={{ width: "100%" }}>
             <TextField
               fullWidth
               id="fullWidth"
@@ -107,7 +107,7 @@ function AppContent() {
         </div>
         <button
           onClick={handelAddClick}
-          className="font-[playwriteGBJ] rounded-xl cursor-pointer px-6 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold transition-all shadow-md shadow-indigo-100 whitespace-nowrap disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hover:bg-slate-300 disabled:active:scale-100 disabled:shadow-none"
+          className="font-[playwriteGBJ] w-full sm:w-auto rounded-xl cursor-pointer px-6 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold transition-all shadow-md shadow-indigo-100 whitespace-nowrap disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hover:bg-slate-300 disabled:active:scale-100 disabled:shadow-none text-center justify-center flex"
           disabled={titleInput.trim().length == 0}
         >
           أضافة مهمة
