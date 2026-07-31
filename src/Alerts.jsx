@@ -60,8 +60,22 @@ export const showEditTask = ({
   Swal.fire({
     title: "تعديل المهمة",
     html: `
-      <input id="swal-input1" class="swal2-input" placeholder="ادخل عنوان المهمة" value="${initialTitle}">
-      <input id="swal-input2" class="swal2-input" placeholder="ادخل تفاصيل المهمة" value="${initialDetails}">
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+        <input 
+          id="swal-input1" 
+          class="swal2-input" 
+          placeholder="ادخل عنوان المهمة" 
+          value="${initialTitle}"
+          style="margin: 0; width: 100%; box-sizing: border-box; font-family: inherit;"
+        >
+        <input
+          id="swal-input2"
+          class="swal2-input"
+          placeholder="ادخل تفاصيل المهمة"
+          value="${initialDetails}"
+          style="margin: 0; width: 100%; box-sizing: border-box; font-family: inherit;"
+        >
+      </div>
     `,
     focusConfirm: false,
     showCancelButton: true,
@@ -69,11 +83,18 @@ export const showEditTask = ({
     cancelButtonText: "الغاء",
     confirmButtonColor: "#059669",
     cancelButtonColor: "#e11d48",
+    customClass: {
+      popup: "custom-swal-popup",
+    },
     preConfirm: () => {
-      return {
-        title: document.getElementById("swal-input1").value,
-        details: document.getElementById("swal-input2").value,
-      };
+      const title = document.getElementById("swal-input1").value.trim();
+      const details = document.getElementById("swal-input2").value.trim();
+
+      if (!title) {
+        Swal.showValidationMessage("عنوان المهمة مطلوب!");
+        return false;
+      }
+      return { title, details };
     },
   }).then((result) => {
     if (result.isConfirmed && result.value) {
