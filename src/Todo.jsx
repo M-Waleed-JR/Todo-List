@@ -88,8 +88,10 @@ export default function Todo({ todo }) {
             minWidth: "auto",
             whiteSpace: "nowrap",
             boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
-            "&:hover": {
-              backgroundColor: "#94f70a7d",
+            "@media (hover: hover)": {
+              "&:hover": {
+                backgroundColor: todo.isCompleted ? "#e0e7ff" : "#d9f99d",
+              },
             },
             transition: "all 0.3s ease",
           }}
