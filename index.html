@@ -5,14 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark = stored
+            ? stored === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Badeen+Display&family=Edu+VIC+WA+NT+Hand:wght@400..700&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Nastaliq+Urdu:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&family=Playwrite+NZ+Basic:wght@100..400&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/Todo-List/assets/index-DJ67GkgL.js"></script>
-    <link rel="stylesheet" crossorigin href="/Todo-List/assets/index-Dlh0jLZe.css">
+    <script type="module" crossorigin src="/Todo-List/assets/index-DmfppVmc.js"></script>
+    <link rel="stylesheet" crossorigin href="/Todo-List/assets/index-JJtDrklx.css">
   </head>
   <body>
     <div id="root"></div>
