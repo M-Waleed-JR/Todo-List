@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
+import RedoIcon from "@mui/icons-material/Redo";
 import { useContext } from "react";
 import TodosContext from "./TodosContext/context";
 import { showEditTask, showDeleteConfirm } from "./Alerts";
@@ -93,7 +94,11 @@ export default function Todo({ todo }) {
             transition: "all 0.3s ease",
           }}
         >
-          <CheckIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
+          {todo.isCompleted ? (
+            <RedoIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
+          ) : (
+            <CheckIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
+          )}
           <span>{todo.isCompleted ? "تراجع" : "إتمام"}</span>
         </Button>
 
