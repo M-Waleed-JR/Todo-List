@@ -1,7 +1,12 @@
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
 export default function Filter({ currentFilter, onFilterChange }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  const inactiveColor = isDark ? "#475569" : "#90a1b9";
+
   return (
     <Stack
       direction="row"
@@ -20,7 +25,7 @@ export default function Filter({ currentFilter, onFilterChange }) {
           fontFamily: "Alexandria",
           borderRadius: "70px",
           backgroundColor:
-            currentFilter === "completed" ? "#155dfc" : "#90a1b9",
+            currentFilter === "completed" ? "#155dfc" : inactiveColor,
           color: "white",
           fontWeight: "bold",
           height: "36px",
@@ -40,7 +45,7 @@ export default function Filter({ currentFilter, onFilterChange }) {
         sx={{
           fontFamily: "Alexandria",
           borderRadius: "70px",
-          backgroundColor: currentFilter === "pending" ? "#155dfc" : "#90a1b9",
+          backgroundColor: currentFilter === "pending" ? "#155dfc" : inactiveColor,
           color: "white",
           fontWeight: "bold",
           height: "36px",
@@ -60,7 +65,7 @@ export default function Filter({ currentFilter, onFilterChange }) {
         sx={{
           fontFamily: "Alexandria",
           borderRadius: "70px",
-          backgroundColor: currentFilter === "all" ? "#155dfc" : "#90a1b9",
+          backgroundColor: currentFilter === "all" ? "#155dfc" : inactiveColor,
           color: "white",
           fontWeight: "bold",
           height: "36px",

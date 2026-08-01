@@ -7,10 +7,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import RedoIcon from "@mui/icons-material/Redo";
 import { useContext } from "react";
+import { useTheme } from "@mui/material/styles";
 import TodosContext from "./TodosContext/context";
 import { showEditTask, showDeleteConfirm } from "./Alerts";
 export default function Todo({ todo }) {
-  const { handleToggleComplete, handleDeleteTodo } = useContext(TodosContext);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  const { handleToggleComplete, handleDeleteTodo, handleEditTodo } =
+    useContext(TodosContext);
 
   const handelCompleteClick = () => {
     handleToggleComplete(todo.id);
@@ -25,8 +29,6 @@ export default function Todo({ todo }) {
       },
     });
   };
-
-  const { handleEditTodo } = useContext(TodosContext);
 
   return (
     <div
@@ -79,8 +81,8 @@ export default function Todo({ todo }) {
           onClick={handelCompleteClick}
           sx={{
             fontFamily: "'Alexandria', cursive",
-            backgroundColor: "white",
-            color: "#4f46e5",
+            backgroundColor: isDark ? "#334155" : "white",
+            color: isDark ? "#c7d2fe" : "#4f46e5",
             borderRadius: "50px",
             fontWeight: "bold",
             fontSize: { xs: "10px", sm: "13px" },
@@ -90,7 +92,13 @@ export default function Todo({ todo }) {
             boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
             "@media (hover: hover)": {
               "&:hover": {
-                backgroundColor: todo.isCompleted ? "#e0e7ff" : "#d9f99d",
+                backgroundColor: todo.isCompleted
+                  ? isDark
+                    ? "#475569"
+                    : "#e0e7ff"
+                  : isDark
+                    ? "#3f6212"
+                    : "#d9f99d",
               },
             },
             transition: "all 0.3s ease",
@@ -108,8 +116,8 @@ export default function Todo({ todo }) {
           onClick={handleDeleteClick}
           sx={{
             fontFamily: "'Alexandria', cursive",
-            backgroundColor: "white",
-            color: "#e11d48",
+            backgroundColor: isDark ? "#334155" : "white",
+            color: isDark ? "#fda4af" : "#e11d48",
             borderRadius: "50px",
             fontWeight: "bold",
             fontSize: { xs: "10px", sm: "13px" },
@@ -117,7 +125,7 @@ export default function Todo({ todo }) {
             minWidth: "auto",
             whiteSpace: "nowrap",
             boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
-            "&:hover": { backgroundColor: "#ffe4e6" },
+            "&:hover": { backgroundColor: isDark ? "#4c1d28" : "#ffe4e6" },
             transition: "all 0.3s ease",
           }}
         >
@@ -137,8 +145,8 @@ export default function Todo({ todo }) {
           }}
           sx={{
             fontFamily: "'Alexandria', cursive",
-            backgroundColor: "white",
-            color: "#4f46e5",
+            backgroundColor: isDark ? "#334155" : "white",
+            color: isDark ? "#c7d2fe" : "#4f46e5",
             borderRadius: "50px",
             fontWeight: "bold",
             fontSize: { xs: "10px", sm: "13px" },
@@ -146,7 +154,7 @@ export default function Todo({ todo }) {
             minWidth: "auto",
             whiteSpace: "nowrap",
             boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
-            "&:hover": { backgroundColor: "#e0e7ff" },
+            "&:hover": { backgroundColor: isDark ? "#475569" : "#e0e7ff" },
             transition: "all 0.3s ease",
           }}
         >
