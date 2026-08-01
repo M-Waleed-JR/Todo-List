@@ -79,12 +79,13 @@ export default function Todo({ todo }) {
         <Button
           onClick={handelCompleteClick}
           sx={{
+            fontFamily: "'Alexandria', cursive",
             backgroundColor: "white",
             color: "#4f46e5",
             borderRadius: "50px",
             fontWeight: "bold",
-            fontSize: { xs: "10px", sm: "13px" }, // حجم مناسب للشاشات الصغيرة يمنع القطع
-            padding: { xs: "4px 8px", sm: "6px 14px" }, // حشوة أصغر تتيح للمحتوى الظهور كاملاً
+            fontSize: { xs: "10px", sm: "13px" },
+            padding: { xs: "4px 8px", sm: "6px 14px" },
             minWidth: "auto",
             whiteSpace: "nowrap",
             boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
@@ -95,13 +96,13 @@ export default function Todo({ todo }) {
           }}
         >
           <CheckIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
-          <span>COMPLETE</span>
+          <span>{todo.isCompleted ? "تراجع" : "إتمام"}</span>
         </Button>
 
-        {/* زر الحذف */}
         <Button
           onClick={handleDeleteClick}
           sx={{
+            fontFamily: "'Alexandria', cursive",
             backgroundColor: "white",
             color: "#e11d48",
             borderRadius: "50px",
@@ -116,10 +117,9 @@ export default function Todo({ todo }) {
           }}
         >
           <DeleteIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
-          <span>DELETE</span>
+          <span>حذف</span>
         </Button>
-
-        {/* زر التعديل */}
+          
         <Button
           onClick={() => {
             showEditTask({
@@ -131,6 +131,7 @@ export default function Todo({ todo }) {
             });
           }}
           sx={{
+            fontFamily: "'Alexandria', cursive",
             backgroundColor: "white",
             color: "#4f46e5",
             borderRadius: "50px",
@@ -145,7 +146,7 @@ export default function Todo({ todo }) {
           }}
         >
           <EditIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
-          <span>EDIT</span>
+          <span>تعديل</span>
         </Button>
       </CardActions>
     </div>

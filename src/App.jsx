@@ -1,6 +1,6 @@
 import Filter from "./Filter";
 import Todo from "./Todo";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import TodosContext from "./TodosContext/context";
 import { TodosProvider } from "./TodosContext/TodosContext";
 import Box from "@mui/material/Box";
@@ -14,15 +14,18 @@ function AppContent() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const showLabelNotch = isInputFocused || titleInput.trim().length > 0;
 
-  const filteredTodos = todos.filter((t) => {
-    if (currentFilter === "completed") {
-      return t.isCompleted;
-    }
-    if (currentFilter === "pending") {
-      return !t.isCompleted;
-    }
-    return true;
-  });
+  const filteredTodos = useMemo(() => {
+    return todos.filter((t) => {
+      if (currentFilter === "completed") {
+        return t.isCompleted;
+      }
+      if (currentFilter === "pending") {
+        return !t.isCompleted;
+      }
+      return true;
+    });
+  }, [todos, currentFilter]);
+
   const todosContent = filteredTodos.map((t) => {
     return <Todo key={t.id} todo={t} />;
   });
@@ -113,8 +116,6 @@ function AppContent() {
           أضافة مهمة
         </button>
       </div>
-
-      {/* حاوية المهام السفلية مع إمكانية التمرير (Scroll) */}
       <div className="overflow-y-auto [&::-webkit-scrollbar]:hidden flex flex-col gap-4">
         {todosContent}
       </div>
