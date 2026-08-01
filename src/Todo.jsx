@@ -63,19 +63,17 @@ export default function Todo({ todo }) {
         )}
       </CardContent>
 
-      {/* شريط الأزرار - متناسق بالكامل بدون قص أو اختفاء لأي عنصر */}
       <CardActions
         sx={{
           display: "flex",
-          justifyContent: { xs: "center", sm: "flex-end" },
+          justifyContent: { xs: "right", sm: "flex-end" },
           alignItems: "center",
-          gap: { xs: 0.5, sm: 1 },
-          pt: 1,
+          gap: { xs: 0.1, sm: 1 },
+          pt: 2,
           px: 0,
           width: "100%",
         }}
       >
-        {/* زر الإكتمال */}
         <Button
           onClick={handelCompleteClick}
           sx={{
@@ -119,7 +117,7 @@ export default function Todo({ todo }) {
           <DeleteIcon sx={{ mr: 0.3, fontSize: { xs: "14px", sm: "18px" } }} />
           <span>حذف</span>
         </Button>
-          
+
         <Button
           onClick={() => {
             showEditTask({
