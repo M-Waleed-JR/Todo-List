@@ -40,15 +40,14 @@ function AppContent() {
   });
 
   return (
-    <div className="mx-auto w-[calc(100%-2rem)] max-w-2xl max-h-[92vh] sm:max-h-[87vh] h-fit my-4 sm:my-8 md:my-16 bg-white dark:bg-slate-900 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl shadow-slate-300 dark:shadow-slate-950 border border-slate-100 dark:border-slate-800 flex flex-col gap-6">
+    <div className="relative mx-auto w-[calc(100%-2rem)] max-w-2xl max-h-[92vh] sm:max-h-[87vh] h-fit my-4 sm:my-8 md:my-16 bg-white dark:bg-slate-900 p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl shadow-slate-300 dark:shadow-slate-950 border border-slate-100 dark:border-slate-800 flex flex-col gap-6">
       <IconButton
         onClick={toggleMode}
         aria-label="toggle theme"
         sx={{
-          position: "fixed",
-          top: 16,
-          right: 16,
-          zIndex: 50,
+          position: "absolute",
+          top: 12,
+          right: 12,
           backgroundColor: isDark ? "#334155" : "white",
           color: isDark ? "#c7d2fe" : "#4f46e5",
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
