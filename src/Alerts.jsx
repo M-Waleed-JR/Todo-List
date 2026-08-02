@@ -1,13 +1,9 @@
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 /**
- * @param {Object} options
- * @param {string} options.title
- * @param {string} options.text
- * @param {Function} options.onConfirm
- * @param {Function} [options.onCancel]
+ * SweeAlert2 Confirm Delete Modal
  */
-
 export const showDeleteConfirm = ({
   title = "هل أنت متأكد؟",
   text = "تريد حذف هذه المهمة نهائياً",
@@ -26,32 +22,18 @@ export const showDeleteConfirm = ({
     reverseButtons: true,
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "تم الحذف",
-        text: "تم حذف المهمة بنجاح",
-        icon: "success",
-        confirmButtonColor: "#059669",
-      });
+      showSuccessToast("تم حذف المهمة بنجاح");
       if (onConfirm) onConfirm();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-      Swal.fire({
-        title: "تم الالغاء",
-        text: "لم يتم حذف المهمة",
-        icon: "error",
-        confirmButtonColor: "#4f46e5",
-      });
+      showErrorToast("تم إلغاء عملية الحذف");
       if (onCancel) onCancel();
     }
   });
 };
 
 /**
- * @param {Object} options
- * @param {string} [options.initialTitle]
- * @param {string} [options.initialDetails]
- * @param {Function} options.onConfirm
+ * SweetAlert2 Edit Task Modal
  */
-
 export const showEditTask = ({
   initialTitle = "",
   initialDetails = "",
@@ -98,7 +80,28 @@ export const showEditTask = ({
     },
   }).then((result) => {
     if (result.isConfirmed && result.value) {
+      showSuccessToast("تم تعديل المهمة بنجاح");
       if (onConfirm) onConfirm(result.value);
     }
   });
+};
+
+/* ===================================================
+   react-hot-toast Helpers
+   =================================================== */
+
+/**
+ * Success Toast Notification
+ * @param {string} message
+ */
+export const showSuccessToast = (message = "تمت العملية بنجاح!") => {
+  toast.success(message);
+};
+
+/**
+ * Error Toast Notification
+ * @param {string} message
+ */
+export const showErrorToast = (message = "حدث خطأ ما!") => {
+  toast.error(message);
 };
