@@ -1,75 +1,87 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import TodosContext from "./context";
+import TodosReducer, {
+  ADD_TODO,
+  TOGGLE_TODO,
+  DELETE_TODO,
+  EDIT_TODO,
+} from "../Reducers/TodosReducer";
 
-const initailTodos = [];
+const STORAGE_KEY = "todos";
+
+const getInitialTodos = () => {
+  try {
+    const storedTodos = localStorage.getItem(STORAGE_KEY);
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  } catch (error) {
+    console.error("فشل في قراءة البيانات", error);
+    return [];
+  }
+};
 
 export function TodosProvider({ children }) {
-  const [todos, setTodos] = useState(() => {
-    try {
-      const storageTodos = localStorage.getItem("todos");
-      return storageTodos ? JSON.parse(storageTodos) : initailTodos;
-    } catch (e) {
-      console.error("فشل في قراءة البيانات", e);
-      return initailTodos;
-    }
-  });
-
+  const [todos, dispatch] = useReducer(
+    TodosReducer,
+    undefined,
+    getInitialTodos,
+  );
   const [titleInput, setTitleInput] = useState("");
 
-  const handelAddClick = () => {
-    if (!titleInput.trim()) return;
-    const newTodo = {
-      id: uuidv4(),
-      title: titleInput,
-      details: "",
-      isCompleted: false,
-    };
+  // Persist todos whenever they change.
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos);
+  const handleAddClick = useCallback(() => {
+    const title = titleInput.trim();
+    if (!title) return;
 
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    setTitleInput("");
-  };
-
-  const handleToggleComplete = (id) => {
-    const updatedTodos = todos.map((t) => {
-      if (t.id === id) {
-        return { ...t, isCompleted: !t.isCompleted };
-      }
-      return t;
+    dispatch({
+      type: ADD_TODO,
+      payload: {
+        id: uuidv4(),
+        title,
+        details: "",
+        isCompleted: false,
+      },
     });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  };
+    setTitleInput("");
+  }, [titleInput]);
 
-  const handleDeleteTodo = (id) => {
-    const updatedTodos = todos.filter((t) => t.id !== id);
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  };
+  const handleToggleComplete = useCallback((id) => {
+    dispatch({ type: TOGGLE_TODO, payload: { id } });
+  }, []);
 
-  const handleEditTodo = (id, newTitle, newDetails) => {
-    const updatedTodos = todos.map((t) =>
-      t.id === id ? { ...t, title: newTitle, details: newDetails } : t,
-    );
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  };
+  const handleDeleteTodo = useCallback((id) => {
+    dispatch({ type: DELETE_TODO, payload: { id } });
+  }, []);
+
+  const handleEditTodo = useCallback((id, title, details) => {
+    dispatch({ type: EDIT_TODO, payload: { id, title, details } });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      todos,
+      titleInput,
+      setTitleInput,
+      handleAddClick,
+      handleToggleComplete,
+      handleDeleteTodo,
+      handleEditTodo,
+    }),
+    [
+      todos,
+      titleInput,
+      handleAddClick,
+      handleToggleComplete,
+      handleDeleteTodo,
+      handleEditTodo,
+    ],
+  );
+
   return (
-    <TodosContext.Provider
-      value={{
-        todos,
-        titleInput,
-        setTitleInput,
-        handelAddClick,
-        handleToggleComplete,
-        handleDeleteTodo,
-        handleEditTodo,
-      }}
-    >
-      {children}
-    </TodosContext.Provider>
+    <TodosContext.Provider value={value}>{children}</TodosContext.Provider>
   );
 }

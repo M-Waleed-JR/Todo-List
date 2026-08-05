@@ -2,10 +2,30 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 
+const FILTERS = [
+  { value: "completed", label: "تم الانتهاء" },
+  { value: "pending", label: "قيد التنفيذ" },
+  { value: "all", label: "الكل" },
+];
+
 export default function Filter({ currentFilter, onFilterChange }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   const inactiveColor = isDark ? "#475569" : "#90a1b9";
+
+  const buttonSx = (isActive) => ({
+    fontFamily: "Alexandria",
+    borderRadius: "70px",
+    backgroundColor: isActive ? "#155dfc" : inactiveColor,
+    color: "white",
+    fontWeight: "bold",
+    height: "36px",
+    flex: { xs: 1, sm: "initial" },
+    fontSize: { xs: "11px", sm: "14px" },
+    px: { xs: 1, sm: 3 },
+    whiteSpace: "nowrap",
+    transition: "background-color 0.8s ease",
+  });
 
   return (
     <Stack
@@ -18,66 +38,16 @@ export default function Filter({ currentFilter, onFilterChange }) {
         justifyContent: "center",
       }}
     >
-      <Button
-        onClick={() => onFilterChange("completed")}
-        variant="contained"
-        sx={{
-          fontFamily: "Alexandria",
-          borderRadius: "70px",
-          backgroundColor:
-            currentFilter === "completed" ? "#155dfc" : inactiveColor,
-          color: "white",
-          fontWeight: "bold",
-          height: "36px",
-          flex: { xs: 1, sm: "initial" },
-          fontSize: { xs: "11px", sm: "14px" },
-          px: { xs: 1, sm: 3 },
-          whiteSpace: "nowrap",
-          transition: "background-color 0.8s ease",
-        }}
-      >
-        تم الانتهاء
-      </Button>
-
-      <Button
-        onClick={() => onFilterChange("pending")}
-        variant="contained"
-        sx={{
-          fontFamily: "Alexandria",
-          borderRadius: "70px",
-          backgroundColor: currentFilter === "pending" ? "#155dfc" : inactiveColor,
-          color: "white",
-          fontWeight: "bold",
-          height: "36px",
-          flex: { xs: 1, sm: "initial" },
-          fontSize: { xs: "11px", sm: "14px" },
-          px: { xs: 1, sm: 3 },
-          whiteSpace: "nowrap",
-          transition: "background-color 0.8s ease",
-        }}
-      >
-        قيد التنفيذ
-      </Button>
-
-      <Button
-        onClick={() => onFilterChange("all")}
-        variant="contained"
-        sx={{
-          fontFamily: "Alexandria",
-          borderRadius: "70px",
-          backgroundColor: currentFilter === "all" ? "#155dfc" : inactiveColor,
-          color: "white",
-          fontWeight: "bold",
-          height: "36px",
-          flex: { xs: 1, sm: "initial" },
-          fontSize: { xs: "11px", sm: "14px" },
-          px: { xs: 1, sm: 3 },
-          whiteSpace: "nowrap",
-          transition: "background-color 0.8s ease",
-        }}
-      >
-        الكل
-      </Button>
+      {FILTERS.map(({ value, label }) => (
+        <Button
+          key={value}
+          onClick={() => onFilterChange(value)}
+          variant="contained"
+          sx={buttonSx(currentFilter === value)}
+        >
+          {label}
+        </Button>
+      ))}
     </Stack>
   );
 }

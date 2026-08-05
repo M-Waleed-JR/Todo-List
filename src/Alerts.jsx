@@ -1,8 +1,21 @@
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
+/** Escape a string for safe interpolation into HTML. */
+const escapeHtml = (value) =>
+  value.replace(/[&<>"']/g, (char) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[char];
+  });
+
 /**
- * SweeAlert2 Confirm Delete Modal
+ * SweetAlert2 Confirm Delete Modal
  */
 export const showDeleteConfirm = ({
   title = "هل أنت متأكد؟",
@@ -43,18 +56,18 @@ export const showEditTask = ({
     title: "تعديل المهمة",
     html: `
       <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
-        <input 
-          id="swal-input1" 
-          class="swal2-input" 
-          placeholder="ادخل عنوان المهمة" 
-          value="${initialTitle}"
+        <input
+          id="swal-input1"
+          class="swal2-input"
+          placeholder="ادخل عنوان المهمة"
+          value="${escapeHtml(initialTitle)}"
           style="margin: 0; width: 100%; box-sizing: border-box; font-family: inherit;"
         >
         <input
           id="swal-input2"
           class="swal2-input"
           placeholder="ادخل تفاصيل المهمة"
-          value="${initialDetails}"
+          value="${escapeHtml(initialDetails)}"
           style="margin: 0; width: 100%; box-sizing: border-box; font-family: inherit;"
         >
       </div>

@@ -13,7 +13,7 @@ import DarkModeRounded from "@mui/icons-material/DarkModeRounded";
 import LightModeRounded from "@mui/icons-material/LightModeRounded";
 
 function AppContent() {
-  const { todos, titleInput, setTitleInput, handelAddClick } =
+  const { todos, titleInput, setTitleInput, handleAddClick } =
     useContext(TodosContext);
   const { mode, toggleMode } = useThemeMode();
   const theme = useTheme();
@@ -64,17 +64,13 @@ function AppContent() {
         مهامي
       </h1>
 
-      <Filter
-        currentFilter={currentFilter}
-        onFilterChange={(newFilter) => setCurrentFilter(newFilter)}
-      />
+      <Filter currentFilter={currentFilter} onFilterChange={setCurrentFilter} />
 
       <div className="flex flex-col sm:flex-row gap-3 w-full sm:items-center">
         <div className="relative flex-1 w-full">
           <Box sx={{ width: "100%" }}>
             <TextField
               fullWidth
-              id="fullWidth"
               label="أضف مهمة جديدة"
               value={titleInput}
               onFocus={() => setIsInputFocused(true)}
@@ -93,9 +89,8 @@ function AppContent() {
                   textAlign: "right",
                   fontWeight: 500,
                   fontFamily: "Alexandria, sans-serif",
-                  color: isDark ? "#e2e8f0" : "inherit",
+                  color: isDark ? "#e2e8f0" : "#1e293b",
                 },
-
                 "& .MuiInputLabel-root": {
                   fontFamily: "Alexandria, sans-serif",
                   color: "rgb(148, 163, 184)",
@@ -115,7 +110,6 @@ function AppContent() {
                 },
                 "& .MuiOutlinedInput-root": {
                   borderRadius: "1rem",
-                  backgroundColor: isDark ? "#1e293b" : "#f8fafc",
                   transition: "all 0.2s ease-in-out",
                   "& fieldset": {
                     borderColor: isDark
@@ -129,7 +123,6 @@ function AppContent() {
                       : "rgb(203, 213, 225)",
                   },
                   "&.Mui-focused": {
-                    backgroundColor: isDark ? "#1e293b" : "#ffffff",
                     boxShadow: "none !important",
                     "& fieldset": {
                       borderColor: "rgb(99, 102, 241)",
@@ -142,9 +135,9 @@ function AppContent() {
           </Box>
         </div>
         <button
-          onClick={handelAddClick}
+          onClick={handleAddClick}
           className="font-[playwriteGBJ] w-full sm:w-auto rounded-xl cursor-pointer px-6 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold transition-all shadow-md shadow-indigo-100 dark:shadow-indigo-950 whitespace-nowrap disabled:bg-slate-300 disabled:text-slate-500 dark:disabled:bg-slate-700 dark:disabled:text-slate-400 disabled:cursor-not-allowed disabled:hover:bg-slate-300 dark:disabled:hover:bg-slate-700 disabled:active:scale-100 disabled:shadow-none text-center justify-center flex"
-          disabled={titleInput.trim().length == 0}
+          disabled={!titleInput.trim()}
         >
           أضافة مهمة
         </button>
