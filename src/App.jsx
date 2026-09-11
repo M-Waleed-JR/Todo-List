@@ -23,6 +23,12 @@ function AppContent() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const showLabelNotch = isInputFocused || titleInput.trim().length > 0;
 
+  const handleTitleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAddClick();
+    }
+  };
+
   const filteredTodos = useMemo(() => {
     return todos.filter((t) => {
       if (currentFilter === "completed") {
@@ -76,6 +82,7 @@ function AppContent() {
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
               onChange={(e) => setTitleInput(e.target.value)}
+              onKeyDown={handleTitleKeyDown}
               slotProps={{
                 inputLabel: {
                   shrink: showLabelNotch,
