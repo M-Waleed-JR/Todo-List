@@ -9,10 +9,9 @@
       (function () {
         try {
           var stored = localStorage.getItem("theme");
-          var dark = stored
-            ? stored === "dark"
-            : window.matchMedia("(prefers-color-scheme: dark)").matches;
-          if (dark) document.documentElement.classList.add("dark");
+          if (stored === "dark") {
+            document.documentElement.classList.add("dark");
+          }
         } catch (e) {}
       })();
     </script>
@@ -22,7 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Badeen+Display&family=Edu+VIC+WA+NT+Hand:wght@400..700&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Noto+Nastaliq+Urdu:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&family=Playwrite+NZ+Basic:wght@100..400&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="./assets/index-WhKNaVM6.js"></script>
+    <script type="module" crossorigin src="./assets/index-BBVrhVvj.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-xFKKT_fB.css">
   </head>
   <body>
