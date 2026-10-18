@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
 import ThemeContext from "./context";
 
 const getInitialMode = () => {
@@ -9,9 +12,7 @@ const getInitialMode = () => {
   } catch (e) {
     console.error("فشل في قراءة وضع العرض", e);
   }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 };
 
 export function ThemeProvider({ children }) {
@@ -31,10 +32,7 @@ export function ThemeProvider({ children }) {
     [],
   );
 
-  const theme = useMemo(
-    () => createTheme({ palette: { mode } }),
-    [mode],
-  );
+  const theme = useMemo(() => createTheme({ palette: { mode } }), [mode]);
 
   const value = useMemo(() => ({ mode, toggleMode }), [mode, toggleMode]);
 
